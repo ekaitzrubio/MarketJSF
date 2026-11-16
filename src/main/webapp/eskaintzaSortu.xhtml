@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" xmlns:p="primefaces"
+	xmlns:ui="jakarta.faces.facelets">
+
+
+
+<h3>Sortu</h3>
+
+<h:form>
+	<p>
+		Tituloa
+		<h:inputText id="izen" value="#{Eskaintza.izena}">
+		</h:inputText>
+	</p>
+
+
+	<p>
+		Deskribapena
+		<h:inputText id="izen" value="#{Eskaintza.deskribapena}">
+		</h:inputText>
+	</p>
+
+	<p>
+		Prezioa
+		<h:inputText id="izen" value="#{Eskaintza.pezioa}">
+		</h:inputText>
+	</p>
+
+	<p>
+		Egoera
+		<h:selectOneMenu id="egoera" value="#{Eskaintza.egoera}">
+			<f:selectItem itemValue="Berria" itemLabel="Berria" />
+			<f:selectItem itemValue="Erabilita" itemLabel="Erabilita" />
+			<f:selectItem itemValue="" itemLabel="" />
+		</h:selectOneMenu>
+	</p>
+</h:form>
+
+</html>

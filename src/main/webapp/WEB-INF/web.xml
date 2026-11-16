@@ -29,6 +29,6 @@
 	<!-- Hasierako JSFa (Cambia "SortuEskaintza.xhtml" por la página con la 
 		que quieras que empiece tu app) -->
 	<welcome-file-list>
-		<welcome-file>SortuEskaintza.xhtml</welcome-file>
+		<welcome-file>sortuEskaintza.xhtml</welcome-file>
 	</welcome-file-list>
 </web-app>
