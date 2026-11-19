@@ -10,6 +10,7 @@ import domain.Sale;
 import exceptions.MustBeLaterThanTodayException;
 import exceptions.ParamNullException;
 import exceptions.SaleAlreadyExistException;
+import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.inject.Named;
@@ -33,6 +34,7 @@ public class EskaintzakBean {
     
 	
     public EskaintzakBean() {
+    	 facadeBL=FacadeBean.getBusinessLogic();
     }
 	
     
@@ -40,7 +42,7 @@ public class EskaintzakBean {
 		try {
 			
 			Date dataObj = UtilDate.trim(new Date());
-			Sale sale = FacadeBean.getBusinessLogic().createSale(izena, deskribapena, egoera, prezioa, dataObj, email, null);			
+			Sale sale = facadeBL.createSale(izena, deskribapena, egoera, prezioa, dataObj, email, null);			
 			
 			if(sale != null) {
 				System.out.println("sortu Da");
@@ -60,8 +62,11 @@ public class EskaintzakBean {
 		}
 	}
 	
-	public List<Sale> kontsultatuEskaintza(){		
-		return eskaintzak = FacadeBean.getBusinessLogic().getSales(bilaketa);
+	
+
+	@PostConstruct
+	public List<Sale> kontsultatuEskaintza(){	
+		return eskaintzak = facadeBL.getSales(bilaketa);
 		
 	}
 
