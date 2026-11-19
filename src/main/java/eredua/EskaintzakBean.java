@@ -63,8 +63,8 @@ public class EskaintzakBean {
 	}
 	
 	
+	
 
-	@PostConstruct
 	public List<Sale> kontsultatuEskaintza(){	
 		return eskaintzak = facadeBL.getSales(bilaketa);
 		
