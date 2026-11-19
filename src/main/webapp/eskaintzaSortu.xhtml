@@ -1,39 +1,55 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html"
-	xmlns:f="jakarta.faces.core" xmlns:p="primefaces"
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core"
+	xmlns:p="primefaces"
 	xmlns:ui="jakarta.faces.facelets">
 
+<h:head>
+	<title>Sortu Eskaintza</title>
+</h:head>
 
+<h:body>
+	<h3>Sortu</h3>
 
-<h3>Sortu</h3>
+	<h:form>
+		<h:messages />
 
-<h:form>
-	<p>
-		Tituloa
-		<h:inputText id="izen" value="#{Eskaintza.izena}">
-		</h:inputText>
-	</p>
+		<p>
+			Tituloa
+			<h:inputText id="izena" value="#{eskaintza.izena}" />
+		</p>
 
+		<p>
+			Deskribapena
+			<h:inputText id="deskribapena" value="#{eskaintza.deskribapena}" />
+		</p>
 
-	<p>
-		Deskribapena
-		<h:inputText id="izen" value="#{Eskaintza.deskribapena}">
-		</h:inputText>
-	</p>
+		<p>
+			Prezioa
+			<h:inputText id="prezioa" value="#{eskaintza.prezioa}" />
+		</p>
 
-	<p>
-		Prezioa
-		<h:inputText id="izen" value="#{Eskaintza.pezioa}">
-		</h:inputText>
-	</p>
+		<p>
+			Egoera
+			<h:selectOneMenu id="egoera" value="#{eskaintza.egoera}">
+				<f:selectItem itemValue="1" itemLabel="Berria" />
+				<f:selectItem itemValue="2" itemLabel="Erabilita" />
+				<f:selectItem itemValue="3" itemLabel="" />
+			</h:selectOneMenu>
+		</p>
 
-	<p>
-		Egoera
-		<h:selectOneMenu id="egoera" value="#{Eskaintza.egoera}">
-			<f:selectItem itemValue="Berria" itemLabel="Berria" />
-			<f:selectItem itemValue="Erabilita" itemLabel="Erabilita" />
-			<f:selectItem itemValue="" itemLabel="" />
-		</h:selectOneMenu>
-	</p>
-</h:form>
+		<p>
+			Email
+			<h:inputText id="email" value="#{eskaintza.email}" />
+		</p>
 
+		<p>
+			Data
+			<h:inputText id="data" value="#{eskaintza.data}" />
+		</p>
+
+		<h:commandButton value="Gorde" action="#{eskaintza.sortuEskaintza}" />
+	</h:form>
+</h:body>
 </html>
