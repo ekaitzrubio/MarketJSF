@@ -45,9 +45,9 @@ public class EskaintzakBean {
 			Sale sale = facadeBL.createSale(izena, deskribapena, egoera, prezioa, dataObj, email, null);			
 			
 			if(sale != null) {
-				System.out.println("sortu Da");
+				System.out.println("Eskaintza modu egokian sortu Da");
 			}else {
-				System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA");
+				System.out.println("Eskaintza ez da sortu");
 			}
 			
 		} catch (ParamNullException e) {
@@ -62,13 +62,12 @@ public class EskaintzakBean {
 		}
 	}
 	
-	
-	
-
-	public List<Sale> kontsultatuEskaintza(){	
-		return eskaintzak = facadeBL.getSales(bilaketa);
 		
-	}
+
+	public List<Sale> kontsultatuEskaintza() {
+		System.out.println("bilatu");
+		return this.eskaintzak = this.facadeBL.getSales(bilaketa);
+    }
 
 	public String getIzena() {
 		return izena;

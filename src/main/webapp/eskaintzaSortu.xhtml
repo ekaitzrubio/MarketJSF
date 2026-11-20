@@ -7,49 +7,52 @@
 
 <h:head>
 	<title>Sortu Eskaintza</title>
+	<h:outputStylesheet library="css" name="style.css" />
 </h:head>
 
 <h:body>
-	<h3>Sortu</h3>
+	<div class="page-container">
+		<h3>Sortu</h3>
 
-	<h:form>
-		<h:messages />
+		<h:form>
+			<h:messages />
 
-		<p>
-			Tituloa
-			<h:inputText id="izena" value="#{eskaintza.izena}" />
-		</p>
+			<p class="form-group">
+				<h:outputLabel for="izena" value="Tituloa" />
+				<h:inputText id="izena" value="#{eskaintza.izena}" />
+			</p>
 
-		<p>
-			Deskribapena
-			<h:inputText id="deskribapena" value="#{eskaintza.deskribapena}" />
-		</p>
+			<p class="form-group">
+				<h:outputLabel for="deskribapena" value="Deskribapena" />
+				<h:inputText id="deskribapena" value="#{eskaintza.deskribapena}" />
+			</p>
 
-		<p>
-			Prezioa
-			<h:inputText id="prezioa" value="#{eskaintza.prezioa}" />
-		</p>
+			<p class="form-group">
+				<h:outputLabel for="prezioa" value="Prezioa" />
+				<h:inputText id="prezioa" value="#{eskaintza.prezioa}" />
+			</p>
 
-		<p>
-			Egoera
-			<h:selectOneMenu id="egoera" value="#{eskaintza.egoera}">
-				<f:selectItem itemValue="1" itemLabel="Berria" />
-				<f:selectItem itemValue="2" itemLabel="Erabilita" />
-				<f:selectItem itemValue="3" itemLabel="" />
-			</h:selectOneMenu>
-		</p>
+			<p class="form-group">
+				<h:outputLabel for="egoera" value="Egoera" />
+				<h:selectOneMenu id="egoera" value="#{eskaintza.egoera}">
+					<f:selectItem itemValue="1" itemLabel="Berria" />
+					<f:selectItem itemValue="2" itemLabel="Erabilita" />
+					<f:selectItem itemValue="3" itemLabel="" />
+				</h:selectOneMenu>
+			</p>
 
-		<p>
-			Email
-			<h:inputText id="email" value="#{eskaintza.email}" />
-		</p>
+			<p class="form-group">
+				<h:outputLabel for="email" value="Email" />
+				<h:inputText id="email" value="#{eskaintza.email}" />
+			</p>
 
-		<p>
-			Data
-			<h:inputText id="data" value="#{eskaintza.data}" />
-		</p>
+			<p class="form-group">
+				<h:outputLabel for="data" value="Data" />
+				<h:inputText id="data" value="#{eskaintza.data}" />
+			</p>
 
-		<h:commandButton value="Gorde" action="#{eskaintza.sortuEskaintza}" />
-	</h:form>
+			<h:commandButton value="Gorde" action="#{eskaintza.sortuEskaintza}" />
+		</h:form>
+	</div>
 </h:body>
 </html>
