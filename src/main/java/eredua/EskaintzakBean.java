@@ -3,6 +3,8 @@ package eredua;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import businessLogic.BLFacade;
 import configuration.UtilDate;
@@ -13,61 +15,67 @@ import exceptions.SaleAlreadyExistException;
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Named;
-
 
 @Named("eskaintza")
 @RequestScoped
 public class EskaintzakBean {
-	
 
-    private String izena;
-    private String deskribapena;
-    private float prezioa;
-    private int egoera;
-    private String data;
-    private String email;
-    private BLFacade facadeBL;
-    private List<Sale> eskaintzak = new ArrayList();
-	private String bilaketa= "";
-    
-    
-	
-    public EskaintzakBean() {
-    	 facadeBL=FacadeBean.getBusinessLogic();
-    }
-	
-    
+	private String izena;
+	private String deskribapena;
+	private float prezioa;
+	private int egoera;
+	private String data;
+	private String email;
+	private BLFacade facadeBL;
+	private List<Sale> eskaintzak = new ArrayList();
+	private String bilaketa = "";
+
+	public EskaintzakBean() {
+		facadeBL = FacadeBean.getBusinessLogic();
+	}
+
+	@PostConstruct
+	public void init() {
+		if (this.facadeBL == null) {
+			this.facadeBL = FacadeBean.getBusinessLogic();
+		}
+	}
+
 	public void sortuEskaintza() {
 		try {
-			
-			Date dataObj = UtilDate.trim(new Date());
-			Sale sale = facadeBL.createSale(izena, deskribapena, egoera, prezioa, dataObj, email, null);			
-			
-			if(sale != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date dataObj = UtilDate.trim(sdf.parse(data));
+
+			Sale sale = facadeBL.createSale(izena, deskribapena, egoera, prezioa, dataObj, email, null);
+
+			if (sale != null) {
 				System.out.println("Eskaintza modu egokian sortu Da");
-			}else {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_INFO, "Eskaintza ondo sortu da!", null));
+			} else {
 				System.out.println("Eskaintza ez da sortu");
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+						"Ezin izan da eskaintza sortu. Begiratu datuak (adib. emaila).", null));
 			}
-			
-		} catch (ParamNullException e) {
-			// TODO Auto-generated catch block
+
+		} catch (ParseException e) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Data ez da baliozkoa.", null));
 			e.printStackTrace();
-		} catch (MustBeLaterThanTodayException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SaleAlreadyExistException e) {
-			// TODO Auto-generated catch block
+		} catch (ParamNullException | MustBeLaterThanTodayException | SaleAlreadyExistException e) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), null));
 			e.printStackTrace();
 		}
 	}
-	
-		
 
 	public List<Sale> kontsultatuEskaintza() {
 		System.out.println("bilatu");
+		
 		return this.eskaintzak = this.facadeBL.getSales(bilaketa);
-    }
+	}
 
 	public String getIzena() {
 		return izena;
@@ -109,21 +117,17 @@ public class EskaintzakBean {
 		return eskaintzak;
 	}
 
-
 	public void setEskaintzak(List<Sale> eskaintzak) {
 		this.eskaintzak = eskaintzak;
 	}
-
 
 	public String getBilaketa() {
 		return bilaketa;
 	}
 
-
 	public void setBilaketa(String bilaketa) {
 		this.bilaketa = bilaketa;
 	}
-
 
 	public void setData(String data) {
 		this.data = data;
@@ -145,5 +149,4 @@ public class EskaintzakBean {
 		this.facadeBL = facadeBL;
 	}
 
-	
 }

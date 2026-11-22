@@ -158,3 +158,25 @@ tr:nth-child(even) {
 tr:hover {
 	background-color: #eff6ff;
 }
+
+.form-layout {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 32px;
+}
+
+.form-fields {
+	flex: 1 1 380px;
+	max-width: 440px;
+}
+
+.form-calendar {
+	flex: 0 0 auto;
+	padding-top: 4px;
+}
+
+.form-actions {
+	margin-top: 20px;
+}

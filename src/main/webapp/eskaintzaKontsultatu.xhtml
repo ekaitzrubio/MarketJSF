@@ -45,6 +45,11 @@
 				<f:facet name="header">Egoera</f:facet>
 				<h:outputText value="#{s.status}" />
 			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Data</f:facet>
+				<h:outputText value="#{s.publicationDate}" />
+			</h:column>
 		</h:dataTable>
 
 		<h:button value="Atzera" outcome="aukeratu" styleClass="btn" />

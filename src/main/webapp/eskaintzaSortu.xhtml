@@ -1,8 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="jakarta.faces.html"
-	xmlns:f="jakarta.faces.core"
-	xmlns:p="primefaces"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" xmlns:p="primefaces"
 	xmlns:ui="jakarta.faces.facelets">
 
 <h:head>
@@ -19,17 +17,17 @@
 
 			<p class="form-group">
 				<h:outputLabel for="izena" value="Tituloa" />
-				<h:inputText id="izena" value="#{eskaintza.izena}" />
+				<h:inputText id="izena" value="#{eskaintza.izena}" required="true" requiredMessage="Izena: Eremu hau derrigorrezkoa da" />
 			</p>
 
 			<p class="form-group">
 				<h:outputLabel for="deskribapena" value="Deskribapena" />
-				<h:inputText id="deskribapena" value="#{eskaintza.deskribapena}" />
+				<h:inputText id="deskribapena" value="#{eskaintza.deskribapena}" required="true" requiredMessage="Deskribapena: Eremu hau derrigorrezkoa da"/>
 			</p>
 
 			<p class="form-group">
 				<h:outputLabel for="prezioa" value="Prezioa" />
-				<h:inputText id="prezioa" value="#{eskaintza.prezioa}" />
+				<h:inputText id="prezioa" value="#{eskaintza.prezioa}" required="true" />
 			</p>
 
 			<p class="form-group">
@@ -37,20 +35,21 @@
 				<h:selectOneMenu id="egoera" value="#{eskaintza.egoera}">
 					<f:selectItem itemValue="1" itemLabel="Berria" />
 					<f:selectItem itemValue="2" itemLabel="Erabilita" />
-					<f:selectItem itemValue="3" itemLabel="" />
+					<f:selectItem itemValue="3" itemLabel="Oso erabilita" />
 				</h:selectOneMenu>
 			</p>
 
 			<p class="form-group">
 				<h:outputLabel for="email" value="Email" />
-				<h:inputText id="email" value="#{eskaintza.email}" />
+				<h:inputText id="email" value="#{eskaintza.email}" required="true" requiredMessage="Email: Eremu hau derrigorrezkoa da" />
 			</p>
 
 			<p class="form-group">
 				<h:outputLabel for="data" value="Data" />
-				<h:inputText id="data" value="#{eskaintza.data}" />
+				<h:inputText id="data" value="#{eskaintza.data}" required="true" requiredMessage="Data: Eremu hau derrigorrezkoa da">
+					<f:passThroughAttribute name="type" value="date" />
+				</h:inputText>
 			</p>
-
 			<h:commandButton value="Gorde" action="#{eskaintza.sortuEskaintza}" />
 		</h:form>
 	</div>
