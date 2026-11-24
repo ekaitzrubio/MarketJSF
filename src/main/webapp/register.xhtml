@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core"
+	xmlns:p="primefaces"
+	xmlns:ui="jakarta.faces.facelets">
+
+<h:head>
+	<title>Erregistratu</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+
+<h:body>
+	<div class="page-container">
+		<h3>Erregistratu</h3>
+
+		<h:form>
+			<h:messages />
+
+			<p class="form-group">
+				<h:outputLabel for="izena" value="Izena" />
+				<h:inputText id="izena" value="#{userBean.izena}" required="true" />
+			</p>
+
+			<p class="form-group">
+				<h:outputLabel for="email" value="Email" />
+				<h:inputText id="email" value="#{userBean.email}" required="true" />
+			</p>
+
+			<p class="form-group">
+				<h:outputLabel for="password" value="Pasahitza" />
+				<h:inputSecret id="password" value="#{userBean.password}" required="true" />
+			</p>
+
+			<div class="form-actions">
+				<h:commandButton value="Sortu kontua" action="#{userBean.register}" />
+			</div>
+
+			<p class="form-group">
+				<h:link value="Baduzu kontua? Hasi saioa" outcome="login" />
+			</p>
+		</h:form>
+	</div>
+</h:body>
+</html>

@@ -10,6 +10,11 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
+		<multipart-config>
+			<max-file-size>5242880</max-file-size>
+			<max-request-size>10485760</max-request-size>
+			<file-size-threshold>0</file-size-threshold>
+		</multipart-config>
 	</servlet>
 
 	<listener>
@@ -22,12 +27,11 @@
 	</servlet-mapping>
 
 	<context-param>
-		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+		<param-name>jakarta.faces.DEFAULT_SUFFIX</param-name>
 		<param-value>.xhtml</param-value>
 	</context-param>
 
-	<!-- Hasierako JSFa (Cambia "SortuEskaintza.xhtml" por la página con la 
-		que quieras que empiece tu app) -->
+	<!-- Hasierako JSFa -->
 	<welcome-file-list>
 		<welcome-file>aukeratu.xhtml</welcome-file>
 	</welcome-file-list>

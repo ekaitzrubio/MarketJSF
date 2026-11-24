@@ -2,60 +2,130 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html"
 	xmlns:f="jakarta.faces.core" xmlns:p="primefaces"
 	xmlns:ui="jakarta.faces.facelets">
-	
-
 
 <h:head>
 	<title>Eskaintzak Kontsultatu</title>
 	<h:outputStylesheet library="css" name="style.css" />
+	<style>
+.modal-backdrop {
+	position: fixed;
+	inset: 0;
+	background-color: rgba(15, 23, 42, 0.55);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	padding: 16px;
+}
+
+.modal-card {
+	background: #ffffff;
+	max-width: 540px;
+	width: 100%;
+	padding: 24px;
+	border-radius: 10px;
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal-img {
+	max-width: 100%;
+	max-height: 260px;
+	display: block;
+	margin: 12px auto;
+	border-radius: 6px;
+	object-fit: contain;
+}
+</style>
 </h:head>
 
 <h:body>
-	<h3>Kontsulatu</h3>
+	<div class="page-container">
+		<h3>Kontsultatu</h3>
 
+		<h:form>
+			<h:messages />
 
+			<div class="search-bar">
+				<h:inputText id="bilatu" value="#{eskaintza.bilaketa}" />
+				<h:commandButton value="Bilatu"
+					action="#{eskaintza.kontsultatuEskaintza}" />
+			</div>
 
-	<h:form>
-		<h:messages />
+			<h:dataTable id="eskaintzakTaula" value="#{eskaintza.eskaintzak}"
+				var="s">
+				<h:column>
+					<f:facet name="header">Tituloa</f:facet>
+					<h:commandLink value="#{s.title}"
+						action="#{eskaintza.ikusiXehetasunak(s)}">
+						<f:ajax render="@form" />
+					</h:commandLink>
+				</h:column>
 
-		<h:inputText id="bilatu" value="#{eskaintza.bilaketa}" />
-		<h:commandButton value="Bilatu"
-			action="#{eskaintza.kontsultatuEskaintza}" />
+				<h:column>
+					<f:facet name="header">Deskribapena</f:facet>
+					<h:outputText value="#{s.description}" />
+				</h:column>
 
+				<h:column>
+					<f:facet name="header">Prezioa</f:facet>
+					<h:outputText value="#{s.price}" />
+				</h:column>
+			</h:dataTable>
 
-		<h:dataTable id="eskaintzakTaula" value="#{eskaintza.eskaintzak}"
-			var="s" border="1" cellpadding="5" cellspacing="0">
+			<div class="form-actions">
+				<h:button value="Atzera" outcome="aukeratu" styleClass="btn" />
+			</div>
 
-			<h:column>
-				<f:facet name="header">Tituloa</f:facet>
-				<h:outputText value="#{s.title}" />
-			</h:column>
+			<!-- Ventana / modal con toda la información y la foto -->
+			<h:panelGroup rendered="#{eskaintza.hautatutakoEskaintza != null}">
+				<div class="modal-backdrop">
+					<div class="modal-card">
+						<h3>#{eskaintza.hautatutakoEskaintza.title}</h3>
 
-			<h:column>
-				<f:facet name="header">Deskribapena</f:facet>
-				<h:outputText value="#{s.description}" />
-			</h:column>
+						<h:graphicImage library="images"
+							name="#{eskaintza.argazkiFitxategia}"
+							alt="#{eskaintza.hautatutakoEskaintza.title}"
+							styleClass="modal-img"
+							rendered="#{eskaintza.argazkiFitxategia != null}" />
 
-			<h:column>
-				<f:facet name="header">Prezioa</f:facet>
-				<h:outputText value="#{s.price}" />
-			</h:column>
+						<p class="form-group">
+							<span class="field-label">Deskribapena:</span>
+							<h:outputText
+								value="#{eskaintza.hautatutakoEskaintza.description}" />
+						</p>
 
-			<h:column>
-				<f:facet name="header">Egoera</f:facet>
-				<h:outputText value="#{s.status}" />
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">Data</f:facet>
-				<h:outputText value="#{s.publicationDate}" />
-			</h:column>
-		</h:dataTable>
+						<p class="form-group">
+							<span class="field-label">Prezioa:</span>
+							<h:outputText value="#{eskaintza.hautatutakoEskaintza.price}" />
+						</p>
 
-		<h:button value="Atzera" outcome="aukeratu" styleClass="btn" />
-	</h:form>
+						<p class="form-group">
+							<span class="field-label">Egoera:</span>
+							<h:outputText value="#{eskaintza.hautatutakoEskaintza.status}" />
+						</p>
 
+						<p class="form-group">
+							<span class="field-label">Data:</span>
+							<h:outputText
+								value="#{eskaintza.hautatutakoEskaintza.publicationDate}">
+								<f:convertDateTime pattern="yyyy-MM-dd" />
+							</h:outputText>
+						</p>
 
+						<p class="form-group">
+							<span class="field-label">Saltzailea:</span>
+							<h:outputText
+								value="#{eskaintza.hautatutakoEskaintza.seller.email}" />
+						</p>
 
+						<div class="form-actions">
+							<h:commandButton value="Itxi"
+								action="#{eskaintza.itxiXehetasunak}" />
+						</div>
+					</div>
+				</div>
+			</h:panelGroup>
+		</h:form>
+	</div>
 </h:body>
 </html>

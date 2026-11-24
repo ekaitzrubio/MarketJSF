@@ -12,22 +12,26 @@
 	<div class="page-container">
 		<h3>Sortu</h3>
 
-		<h:form>
+		<h:form enctype="multipart/form-data">
 			<h:messages />
 
 			<p class="form-group">
 				<h:outputLabel for="izena" value="Tituloa" />
-				<h:inputText id="izena" value="#{eskaintza.izena}" required="true" requiredMessage="Izena: Eremu hau derrigorrezkoa da" />
+				<h:inputText id="izena" value="#{eskaintza.izena}" required="true"
+					requiredMessage="Izena: Eremu hau derrigorrezkoa da" />
 			</p>
 
 			<p class="form-group">
 				<h:outputLabel for="deskribapena" value="Deskribapena" />
-				<h:inputText id="deskribapena" value="#{eskaintza.deskribapena}" required="true" requiredMessage="Deskribapena: Eremu hau derrigorrezkoa da"/>
+				<h:inputText id="deskribapena" value="#{eskaintza.deskribapena}"
+					required="true"
+					requiredMessage="Deskribapena: Eremu hau derrigorrezkoa da" />
 			</p>
 
 			<p class="form-group">
 				<h:outputLabel for="prezioa" value="Prezioa" />
-				<h:inputText id="prezioa" value="#{eskaintza.prezioa}" required="true" />
+				<h:inputText id="prezioa" value="#{eskaintza.prezioa}"
+					required="true" />
 			</p>
 
 			<p class="form-group">
@@ -41,15 +45,23 @@
 
 			<p class="form-group">
 				<h:outputLabel for="email" value="Email" />
-				<h:inputText id="email" value="#{eskaintza.email}" required="true" requiredMessage="Email: Eremu hau derrigorrezkoa da" />
+				<h:inputText id="email" value="#{eskaintza.email}" required="true"
+					requiredMessage="Email: Eremu hau derrigorrezkoa da" />
 			</p>
 
 			<p class="form-group">
 				<h:outputLabel for="data" value="Data" />
-				<h:inputText id="data" value="#{eskaintza.data}" required="true" requiredMessage="Data: Eremu hau derrigorrezkoa da">
+				<h:inputText id="data" value="#{eskaintza.data}" required="true"
+					requiredMessage="Data: Eremu hau derrigorrezkoa da">
 					<f:passThroughAttribute name="type" value="date" />
 				</h:inputText>
 			</p>
+
+			<p class="form-group">
+				<h:outputLabel for="argazkia" value="Argazkia" />
+				<input id="argazkia" type="file" name="argazkia" accept="image/*" />
+			</p>
+
 			<h:commandButton value="Gorde" action="#{eskaintza.sortuEskaintza}" />
 		</h:form>
 	</div>
